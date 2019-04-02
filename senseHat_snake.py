@@ -3,25 +3,11 @@ from sense_hat import SenseHat              #Library that controls the Sense Hat
 from time import sleep                      #Allows us to pause our program
 
 
-
-#This is called a class.  It is like a blueprint for creating objects.
-#The following link provides a detailed but advanced explanation of classes in python:
-#https://www.python-course.eu/python3_object_oriented_programming.php
 class snakeGame():
 
     bg_color = (0,0,0)                      #Background color
     snake_color = (255,255,255)             #Snake color
     food_color = (0,255,0)                  #Food color
-
-        
-    #All of the following def statements are called methods.  They are very
-    #similar to functions except they are called inside classes and the first
-    #argument is always 'self'
-    
-    #Self refers to the current instance of snakeGame called 'snake' (see line 157).
-    #Most of the variables have 'self.' infront of them.  This means they are
-    #attributes of the instance 'snake' and can be referenced throughout the program
-    #with snake.attribute or self.attribute.
         
     #Method to initialize game.  This doesn't run until we call 'snake.startGame()'	(line 158)
     def startGame(self):
@@ -45,10 +31,8 @@ class snakeGame():
             for event in sense.stick.get_events():
                 self._handle_event(event)
             playing = self.move()
-    
-
-    #This method is called during the "while playing" loop above.  
-    #It changes the direction attribute of the snake after checking that 
+      
+    #Changes the direction attribute of the snake after checking that 
     #it's not moving in the opposite direction.
     def _handle_event(self, event):
         if event.direction == 'up':
@@ -90,9 +74,8 @@ class snakeGame():
                     return True  
             return False
 
-    #This method is used by move.  It adds a segment to the front of the snake and
-    #deletes a segment from the end of a snake using .pop().  If the snake just ate
-    #its length would increase by one and the last segment would not be deleted.
+    #Adds a segment to the front of the snake and
+    #deletes a segment from the end of a snake.
     def addSegment(self, x, y):
         sense.set_pixel(x,y,self.snake_color)
         self.tail.insert(0, (x, y))
@@ -103,8 +86,8 @@ class snakeGame():
             self.tail.pop()
       
     
-    #This method is responsible for snake movement.  It creates a new segment depending
-    #on the snake.direction attribute.  If the new segment passes .checkCollision
+    #Creates a new segment depending on the snake.direction
+    #attribute.  If the new segment passes .checkCollision
     #it calls .addSegment.  If there is a collision, endgame procedure occurs.
     def move(self):
         newSegment = [self.tail[0][0], self.tail[0][1]]
@@ -134,10 +117,6 @@ class snakeGame():
 			
             return True
 
-#The if statement just ensures that senseHat_snake.py is the main module running,
-#not an imported module.  This is unnecessary here, but it is a very common 
-#convention.  For further information, see the following Stack Overflow post:
-#https://stackoverflow.com/questions/419163/what-does-if-name-main-do
 if __name__ == "__main__":
     sense = SenseHat()                      #   This creates an instance of SenseHat()
                                             #called sense
