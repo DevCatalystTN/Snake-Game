@@ -35,18 +35,14 @@ class snakeGame():
     #Changes the direction attribute of the snake after checking that 
     #it's not moving in the opposite direction.
     def _handle_event(self, event):
-        if event.direction == 'up':
-            if self.direction != 'down':
-                self.direction = 'up'
-        elif event.direction == 'down':
-            if self.direction != 'up':
-                self.direction = 'down'
-        elif event.direction == 'left':
-            if self.direction != 'right':
-                self.direction = 'left'
-        elif event.direction == 'right':
-            if self.direction != 'left':
-                self.direction = 'right'
+        if event.direction == 'up' and self.direction != 'down':
+            self.direction = 'up'
+        elif event.direction == 'down' and self.direction != 'up':
+            self.direction = 'down'
+        elif event.direction == 'left' and self.direction != 'right':
+            self.direction = 'left'
+        elif event.direction == 'right' and self.direction != 'left':
+            self.direction = 'right'
     
 
     #This method places food in a random location.  It creates a random integer
